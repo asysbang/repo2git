@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+<remote fetch="https://android.googlesource.com" name="aosp" review="android-review.googlesource.com" revision="refs/tags/android-7.1.2_r36"/>
+<remote fetch="https://github.com" name="github" review="review.LineageOS.org"/>
+<remote fetch="https://github.com/meijjaa" name="meijjaa"/>
+<remote fetch="." name="x86"/>
+
+<default remote="github" revision="refs/heads/cm-14.1" sync-c="true" sync-j="4"/>
+
+<copyfile dest="Makefile" src="core/root.mk"/>
+</project>
+<linkfile dest="Android.bp" src="root.bp"/>
+<linkfile dest="bootstrap.bash" src="bootstrap.bash"/>
+</project>
+</manifest>
