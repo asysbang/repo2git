@@ -197,7 +197,7 @@ public class ParserFun {
 			//System.out.println(sb.toString());
 		}
 		sb.append(" ");
-		sb.append(revision);
+		//sb.append(revision);
 		System.out.println(sb.toString());
 		return true;
 	}
