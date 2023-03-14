@@ -15,18 +15,18 @@ public class ParserFun {
 	private File mProjectFile, mUnusedFile;
 	private BufferedWriter mWriterProject, mWriterUnused;
 	private int totalLine, projectLine, unusedLine;
+	private String mDefaultTags;
 
-	public ParserFun(String filename) {
+	public ParserFun(String filename, String outDir, String defaultTags) {
 		totalLine = 0;
 		projectLine = 0;
 		unusedLine = 0;
+		mDefaultTags = defaultTags;
 		try {
 			mManifestFile = new File("manifest/" + filename);
-			mProjectFile = new File(
-					"out/" + VerConfig.Cm14Android71.OUT_DIR + File.separator + VerConfig.Cm14Android71.PROJECT);
+			mProjectFile = new File("out/" + outDir + File.separator + VerConfig.Cm14Android71.PROJECT);
 			mWriterProject = new BufferedWriter(new FileWriter(mProjectFile));
-			mUnusedFile = new File(
-					"out/" + VerConfig.Cm14Android71.OUT_DIR + File.separator + VerConfig.Cm14Android71.UNUSED);
+			mUnusedFile = new File("out/" + outDir + File.separator + VerConfig.Cm14Android71.UNUSED);
 			mWriterUnused = new BufferedWriter(new FileWriter(mUnusedFile));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -60,7 +60,7 @@ public class ParserFun {
 		String txt = line.trim();
 		// System.out.println("line:" + txt);
 		totalLine++;
-		String name = null, path = null, upstream = null,remote = null, revision = null;
+		String name = null, path = null, upstream = null, remote = null, revision = null;
 		if (txt.startsWith("<project")) {
 			projectLine++;
 			mWriterProject.write(txt);
@@ -68,9 +68,9 @@ public class ParserFun {
 			mWriterProject.flush();
 			remote = getRemote(txt);
 			if (remote != null) {
-				 //System.out.println("remote : " + remote);
+				// System.out.println("remote : " + remote);
 			} else {
-				//System.out.println("remote is null : " + txt);
+				// System.out.println("remote is null : " + txt);
 			}
 			name = getName(txt);
 			if (name != null) {
@@ -87,20 +87,20 @@ public class ParserFun {
 			}
 			upstream = getUpstream(txt);
 			if (upstream != null) {
-//				 System.out.println("upstream:" + upstream);
+				 System.out.println("=====upstream:" + upstream);
 			} else {
-				//System.out.println("upstream is null : " + txt);
+//				 System.out.println("=====upstream is null : " + txt);
 			}
 			revision = getRevision(txt);
 			if (revision != null) {
-				// System.out.println("revision:" + revision);
+//				System.out.println("==========revision:" + revision);
 			} else {
-				System.out.println("revision is null : " + txt);
+//				System.out.println("=========revision is null : " + txt);
 			}
 
 		}
-		boolean cloned = cloneGit(remote,name, path, upstream, revision);
-		if (cloned ) {
+		boolean cloned = cloneGit(remote, name, path, upstream, revision);
+		if (cloned) {
 			return;
 		}
 		unusedLine++;
@@ -127,7 +127,8 @@ public class ParserFun {
 		return null;
 	}
 
-	//git clone platform/external/svox --depth 1 external/svox  cee78199bbfae81f54a40671db47096f5f32cdad
+	// git clone platform/external/svox --depth 1 external/svox
+	// cee78199bbfae81f54a40671db47096f5f32cdad
 	private String getUpstream(String txt) {
 		String pattern = ".*upstream=\"(\\S*)\".*";
 		Pattern compile = Pattern.compile(pattern);
@@ -136,6 +137,7 @@ public class ParserFun {
 			return matcher.group(1);
 		return null;
 	}
+
 	private String getRemote(String txt) {
 		String pattern = ".*remote=\"(\\S*)\".*";
 		Pattern compile = Pattern.compile(pattern);
@@ -162,19 +164,19 @@ public class ParserFun {
 	 * @param upstream !!! 这个可能为null
 	 * @param revision
 	 */
-	private boolean cloneGit(String remote,String name, String path, String upstream, String revision) {
+	private boolean cloneGit(String remote, String name, String path, String upstream, String revision) {
 		// git clone https://github.com/LineageOS/android_development.git --depth 1
 		// development
 		StringBuilder sb = new StringBuilder();
 		sb.append("git clone ");
-		if (null == name ) {
+		if (null == name) {
 			return false;
 		}
-		if (remote ==null||remote.startsWith("LineageOS") ) {
-			sb.append("https://github.com/");
+		if (remote == null || remote.startsWith("LineageOS")) {
+			sb.append("https://android.googlesource.com/");
 		} else if (remote.startsWith("x86")) {
 			sb.append("https://scm.osdn.net/gitroot/android-x86/");
-		} else if (remote.startsWith("aosp")){
+		} else if (remote.startsWith("aosp")) {
 			sb.append("https://android.googlesource.com/");
 		} else {
 			return false;
@@ -187,22 +189,27 @@ public class ParserFun {
 			sb.append(" -b ");
 			if (upstream.startsWith("refs/")) {
 				int lastIndexOf = upstream.lastIndexOf("/");
-				sb.append(upstream.substring(lastIndexOf+1));
-			}else {
+				sb.append(upstream.substring(lastIndexOf + 1));
+			} else {
 				sb.append(upstream);
 			}
-		}else {
-			//upstream is null : <project groups="pdk" name="platform/external/svox" path="external/svox" remote="aosp" revision="cee78199bbfae81f54a40671db47096f5f32cdad"/>
-			//git clone platform/external/svox --depth 1 external/svox  cee78199bbfae81f54a40671db47096f5f32cdad
-			//System.out.println(sb.toString());
+		} else if (mDefaultTags!=null){
+			sb.append(" -b ");
+			sb.append(mDefaultTags);
+			// upstream is null : <project groups="pdk" name="platform/external/svox"
+			// path="external/svox" remote="aosp"
+			// revision="cee78199bbfae81f54a40671db47096f5f32cdad"/>
+			// git clone platform/external/svox --depth 1 external/svox
+			// cee78199bbfae81f54a40671db47096f5f32cdad
+			// System.out.println(sb.toString());
+			
+
 		}
-		sb.append(" ");
-		//sb.append(revision);
+		sb.append(" -b ");
+		sb.append(revision);
 		System.out.println(sb.toString());
 		return true;
 	}
-	
-	
 
 	private String dealUpstream(String txt) {
 		String pattern = ".*name=\"(\\S*)\".*path=\"(\\S*)\".*revision=\"(\\w*)\"";

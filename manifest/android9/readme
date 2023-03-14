@@ -1,0 +1,24 @@
+repo init -u git://git.osdn.net/gitroot/android-x86/manifest -b pie-x86
+
+
+platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6  这个会有个revision
+
+需要特殊处理到指定revision
+<project path="prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6" name="platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6" revision="eb5c9f0ae36bf964f6855bde54e1b387e2c26bb6" clone-depth="1" />
+
+git clone https://android.googlesource.com/kernel/configs --depth 1 kernel/configs  -b android-9.0.0_r61
+！！！！！！kernel/configs 会和 x86额kernel目录有冲突！！！！！！！
+
+x86代码位置
+https://osdn.net/projects/android-x86/scm/git/packages-apps-Camera2/tree/pie-x86/
+
+
+cp build/make/core/root.mk Makefile
+ln -s -r build/make/CleanSpec.mk build/CleanSpec.mk
+ln -s -r build/make/buildspec.mk.default build/buildspec.mk.default
+ln -s -r build/make/core build/core
+ln -s -r build/make/envsetup.sh build/envsetup.sh
+
+
+ln -s build/soong/root.bp Android.bp
+ln -s build/soong/bootstrap.bash bootstrap.bash
