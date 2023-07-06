@@ -87,7 +87,7 @@ public class ParserFun {
 			}
 			upstream = getUpstream(txt);
 			if (upstream != null) {
-				 System.out.println("=====upstream:" + upstream);
+				System.out.println("=====upstream:" + upstream);
 			} else {
 //				 System.out.println("=====upstream is null : " + txt);
 			}
@@ -193,7 +193,7 @@ public class ParserFun {
 			} else {
 				sb.append(upstream);
 			}
-		} else if (mDefaultTags!=null){
+		} else if (mDefaultTags != null) {
 			sb.append(" -b ");
 			sb.append(mDefaultTags);
 			// upstream is null : <project groups="pdk" name="platform/external/svox"
@@ -202,7 +202,6 @@ public class ParserFun {
 			// git clone platform/external/svox --depth 1 external/svox
 			// cee78199bbfae81f54a40671db47096f5f32cdad
 			// System.out.println(sb.toString());
-			
 
 		}
 		sb.append(" -b ");

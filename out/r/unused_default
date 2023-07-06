@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+<remote  name="aosp"
+fetch="https://android.googlesource.com/" />
+<default revision="refs/tags/android-11.0.0_r48"
+remote="aosp"
+sync-c="true"
+sync-j="4" />
+
+<superproject name="platform/superproject" remote="aosp"/>
+<contactinfo bugurl="go/repo-bug" />
+
+<copyfile src="core/root.mk" dest="Makefile" />
+<linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+<linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+<linkfile src="core" dest="build/core" />
+<linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+<linkfile src="target" dest="build/target" />
+<linkfile src="tools" dest="build/tools" />
+</project>
+<linkfile src="root.bp" dest="Android.bp" />
+<linkfile src="bootstrap.bash" dest="bootstrap.bash" />
+</project>
+<linkfile src="os_pickup.mk" dest="hardware/qcom/sdm845/Android.mk" />
+<linkfile src="os_pickup.bp" dest="hardware/qcom/sdm845/Android.bp" />
+</project>
+<linkfile src="os_pickup.mk" dest="hardware/qcom/sm7150/Android.mk" />
+<linkfile src="os_pickup.bp" dest="hardware/qcom/sm7150/Android.bp" />
+</project>
+<linkfile src="os_pickup.mk" dest="hardware/qcom/sm7250/Android.mk" />
+<linkfile src="os_pickup.bp" dest="hardware/qcom/sm7250/Android.bp" />
+</project>
+<linkfile src="os_pickup.mk" dest="hardware/qcom/sm8150/Android.mk" />
+<linkfile src="os_pickup.bp" dest="hardware/qcom/sm8150/Android.bp" />
+</project>
+<linkfile src="os_pickup.mk" dest="hardware/qcom/sm8150p/Android.mk" />
+<linkfile src="os_pickup.bp" dest="hardware/qcom/sm8150p/Android.bp" />
+</project>
+<linkfile src="current/androidx-README.md" dest="frameworks/support.md" />
+</project>
+
+<repo-hooks in-project="platform/tools/repohooks" enabled-list="pre-upload" />
+
+<include name="android-x86.xml" />
+
+</manifest>

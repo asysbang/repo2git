@@ -1,0 +1,57 @@
+  ======>>>>>name和path反的
+  	<project name="device/mediatek/wembley-sepolicy" path="device/mediatek/wembley-sepolicy" groups="device"/>
+  
+  ======>>>>>>带revision的3个
+  git clone https://android.googlesource.com/platform/external/syslinux   external/syslinux  
+  git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6  prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6 
+  git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9   prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9 
+    <project path="external/syslinux" name="platform/external/syslinux" groups="pdk" revision="64c351c59ba88d0b452b62c31a70a86516a72ea9" clone-depth="1" />
+    <project path="prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6" name="platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6" revision="eb5c9f0ae36bf964f6855bde54e1b387e2c26bb6"
+    <project path="prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9" name="platform/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9" revision="7df28e3ae4f7ebdb8e25864a8e0b7ed5c7531339" clone
+  
+  
+=======>>>>>>kernel需要先处理x86的
+=======>>>>>>framework/base 不知道为什么也没有下载下来？？？？？
+  
+=======>>>>>>removeProject 
+一共186个  其中4个是注释的
+	platform/packages/apps/Nfc
+	platform/packages/services/Telecomm
+	platform/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9
+	platform/system/nfc
+
+
+======>>>>>>x86
+一共57个project，其中4个revision不是默认的
+
+======需要处理的copyfile和linkfile
+cp build/make/core/root.mk Makefile
+ln -s -r build/make/CleanSpec.mk build/CleanSpec.mk
+ln -s -r build/make/buildspec.mk.default build/buildspec.mk.default
+ln -s -r build/make/core build/core
+ln -s -r build/make/envsetup.sh build/envsetup.sh
+ln -s -r build/make/target build/target
+ln -s -r build/make/tools build/tools
+
+ln -s build/soong/root.bp Android.bp
+ln -s build/soong/bootstrap.bash bootstrap.bash
+
+
+
+//ln -s hardware/qcom/sdm845/data/ipacfg-mgr/os_pickup.mk hardware/qcom/sdm845/Android.mk
+//ln -s hardware/qcom/sdm845/data/ipacfg-mgr/os_pickup.bp hardware/qcom/sdm845/Android.bp
+//ln -s hardware/qcom/sm7150/gps/os_pickup.mk hardware/qcom/sm7150/Android.mk
+//ln -s hardware/qcom/sm7150/gps/os_pickup.bp hardware/qcom/sm7150/Android.bp
+//ln -s hardware/qcom/sm7250/gps/os_pickup.mk hardware/qcom/sm7250/Android.mk
+//ln -s hardware/qcom/sm7250/gps/os_pickup.bp hardware/qcom/sm7250/Android.bp
+//ln -s hardware/qcom/sm8150/data/ipacfg-mgr/os_pickup.mk hardware/qcom/sm8150/Android.mk
+//ln -s hardware/qcom/sm8150/data/ipacfg-mgr/os_pickup.bp hardware/qcom/sm8150/Android.bp
+//ln -s hardware/qcom/sm8150p/gps/os_pickup.mk hardware/qcom/sm8150p/Android.mk
+//ln -s hardware/qcom/sm8150p/gps/os_pickup.bp hardware/qcom/sm8150p/Android.bp
+
+ln -s prebuilts/sdk/current/androidx-README.md frameworks/support.md
+
+
+ source build/envsetup.sh; lunch android_x86_64-userdebug
+m -j4 iso_img KERNEL_DIR=kernel-4.9 
+
