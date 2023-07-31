@@ -48,16 +48,6 @@ git clone https://android.googlesource.com/platform/external/clang --depth 1 ext
 git clone https://android.googlesource.com/platform/external/cldr --depth 1 external/cldr -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/cn-cbor --depth 1 external/cn-cbor -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/compiler-rt --depth 1 external/compiler-rt -b  android-11.0.0_r48
-
-
-
-
-
-
-
-
-
-
 git clone https://android.googlesource.com/platform/external/conscrypt --depth 1 external/conscrypt -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/cpu_features --depth 1 external/cpu_features -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/cpuinfo --depth 1 external/cpuinfo -b  android-11.0.0_r48
@@ -108,16 +98,6 @@ git clone https://android.googlesource.com/platform/external/gflags --depth 1 ex
 git clone https://android.googlesource.com/platform/external/giflib --depth 1 external/giflib -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/glide --depth 1 external/glide -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/golang-protobuf --depth 1 external/golang-protobuf -b  android-11.0.0_r48
-
-
-
-
-
-
-
-
-
-
 git clone https://android.googlesource.com/platform/external/google-benchmark --depth 1 external/google-benchmark -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/google-breakpad --depth 1 external/google-breakpad -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/google-fonts/arbutus-slab --depth 1 external/google-fonts/arbutus-slab -b  android-11.0.0_r48
@@ -198,16 +178,6 @@ git clone https://android.googlesource.com/platform/external/libese --depth 1 ex
 git clone https://android.googlesource.com/platform/external/libevent --depth 1 external/libevent -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/libexif --depth 1 external/libexif -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/libffi --depth 1 external/libffi -b  android-11.0.0_r48
-
-
-
-
-
-
-
-
-
-
 git clone https://android.googlesource.com/platform/external/libgav1 --depth 1 external/libgav1 -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/libfuse --depth 1 external/libfuse -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/libgsm --depth 1 external/libgsm -b  android-11.0.0_r48
@@ -308,16 +278,6 @@ git clone https://android.googlesource.com/platform/external/python/parse_type -
 git clone https://android.googlesource.com/platform/external/python/pyasn1 --depth 1 external/python/pyasn1 -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/python/pyasn1-modules --depth 1 external/python/pyasn1-modules -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/python/pybind11 --depth 1 external/python/pybind11 -b  android-11.0.0_r48
-
-
-
-
-
-
-
-
-
-
 git clone https://android.googlesource.com/platform/external/python/pycparser --depth 1 external/python/pycparser -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/python/pyopenssl --depth 1 external/python/pyopenssl -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/external/python/rsa --depth 1 external/python/rsa -b  android-11.0.0_r48
@@ -428,16 +388,6 @@ git clone https://android.googlesource.com/platform/frameworks/opt/net/ims --dep
 git clone https://android.googlesource.com/platform/frameworks/opt/net/voip --depth 1 frameworks/opt/net/voip -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/frameworks/opt/net/wifi --depth 1 frameworks/opt/net/wifi -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/frameworks/opt/photoviewer --depth 1 frameworks/opt/photoviewer -b  android-11.0.0_r48
-
-
-
-
-
-
-
-
-
-
 git clone https://android.googlesource.com/platform/frameworks/opt/setupwizard --depth 1 frameworks/opt/setupwizard -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/frameworks/opt/telephony --depth 1 frameworks/opt/telephony -b  android-11.0.0_r48
 git clone https://android.googlesource.com/platform/frameworks/opt/timezonepicker --depth 1 frameworks/opt/timezonepicker -b  android-11.0.0_r48

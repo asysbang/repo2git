@@ -1,3 +1,11 @@
+=====下载代码
+repo init -u git://git.osdn.net/gitroot/android-x86/manifest -b pie-x86 -m android-x86-9.0-r2.xml
+cd kernel
+git fetch x86 kernel-4.9-p
+git checkout -t x86/kernel-4.9-p
+cd .. 
+
+
 repo init -u git://git.osdn.net/gitroot/android-x86/manifest -b pie-x86
 
 

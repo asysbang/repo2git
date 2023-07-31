@@ -1,0 +1,34 @@
+113G	./out
+1.4M	./pdk
+1.2G	./kernel
+1.1G	./system
+45M	./bootable
+2.8G	./cts
+2.3G	./tools
+2.7G	./frameworks
+71M	./bionic
+36M	./sdk
+55G	./prebuilts
+660K	./libnativehelper
+102M	./libcore
+18M	./platform_testing
+121M	./hardware
+600M	./test
+12G	./external
+30M	./dalvik
+31M	./build
+206M	./development
+99M	./art
+1.1G	./device
+1.2G	./packages
+192G	.
+
+不包含out  192-113 = 79G
+
+9.9G
+mv /home/karl/work/codes/android/source/x86/r/prebuilts/clang/host/darwin-x86   /home/karl/work/codes/android/source/x86/bb
+/home/karl/work/codes/android/source/x86/r/prebuilts/clang/host/linux-x86/clang-r383902b1   ==== 这个影响编译
+
+
+
+

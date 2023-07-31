@@ -14,3 +14,7 @@ git clone https://scm.osdn.net/gitroot/android-x86/platform/build --depth 1 buil
 git clone https://android.googlesource.com/platform/build/blueprint --depth 1 build/blueprint  -b android-7.1.2_r36 
 git clone https://android.googlesource.com/platform/build/soong --depth 1 build/soong  -b android-7.1.2_r36  
 git clone https://github.com/LineageOS/android_build_kati --depth 1 build/kati  -b cm-14.1
+
+
+
+//git.osdn.net/gitroot/android-x86/manifest

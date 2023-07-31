@@ -17,7 +17,7 @@ public class Repo4R {
 			mReaderX86 = new BufferedReader(new FileReader(x86Xml));
 			mWriterUnusedDefault = new BufferedWriter(new FileWriter("out/r/unused_default"));
 			mWriterUsedDefault = new BufferedWriter(new FileWriter("out/r/used_default"));
-			
+
 			mWriterUnusedX86 = new BufferedWriter(new FileWriter("out/r/unused_x86"));
 			mWriterUsedX86 = new BufferedWriter(new FileWriter("out/r/used_x86"));
 			mWriterCloneDefault = new BufferedWriter(new FileWriter("out/r/clone_default"));
@@ -31,9 +31,10 @@ public class Repo4R {
 
 	private static final String x86Xml = "manifest/r/android-x86.xml";
 
-	private BufferedWriter mWriterUsedDefault, mWriterUnusedDefault,   mWriterUsedX86, mWriterUnusedX86,mWriterCloneDefault,mWriterCloneX86;
-	
-	private BufferedReader mReaderDefault ,mReaderX86;
+	private BufferedWriter mWriterUsedDefault, mWriterUnusedDefault, mWriterUsedX86, mWriterUnusedX86,
+			mWriterCloneDefault, mWriterCloneX86;
+
+	private BufferedReader mReaderDefault, mReaderX86;
 
 	private RemoveProject mRemoveProject;
 
@@ -58,7 +59,7 @@ public class Repo4R {
 						mWriterUsedDefault.flush();
 						String path = TagParser.getPath(txt);
 						if (path != null) {
-							String joinCloneString = joinCloneString(name,path);
+							String joinCloneString = joinCloneString(name, path);
 							mWriterCloneDefault.write(joinCloneString);
 							mWriterCloneDefault.newLine();
 							mWriterCloneDefault.flush();
@@ -85,17 +86,16 @@ public class Repo4R {
 					String name = TagParser.getName(txt);
 					String path = TagParser.getPath(txt);
 					String revision = TagParser.getRevision(txt);
-					if (name!=null && path != null) {
-						String joinCloneString = joinCloneString(name,path,revision);
+					if (name != null && path != null) {
+						String joinCloneString = joinCloneString(name, path, revision);
 						mWriterCloneX86.write(joinCloneString);
 						mWriterCloneX86.newLine();
 						mWriterCloneX86.flush();
 					} else {
 						throw new RuntimeException("=========RuntimeException=");
 					}
-					
-				}
-				else {
+
+				} else {
 					mWriterUnusedX86.write(txt);
 					mWriterUnusedX86.newLine();
 					mWriterUnusedX86.flush();
@@ -118,7 +118,8 @@ public class Repo4R {
 		return sb.toString();
 	}
 
-	//git clone https://android.googlesource.com/platform/build --depth 1 build/make  -b android-9.0.0_r61 
+	// git clone https://android.googlesource.com/platform/build --depth 1
+	// build/make -b android-9.0.0_r61
 	private String joinCloneString(String name, String path) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("git clone https://android.googlesource.com/");

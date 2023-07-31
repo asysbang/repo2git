@@ -4,6 +4,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TagParser {
+	
+	public static String getUpstream(String txt) {
+		String pattern = ".*upstream=\"(\\S*)\".*";
+		Pattern compile = Pattern.compile(pattern);
+		Matcher matcher = compile.matcher(txt);
+		if (matcher.find())
+			return matcher.group(1);
+		return null;
+	}
+
+	public static String getRemote(String txt) {
+		String pattern = ".*remote=\"(\\S*)\".*";
+		Pattern compile = Pattern.compile(pattern);
+		Matcher matcher = compile.matcher(txt);
+		if (matcher.find())
+			return matcher.group(1);
+		return null;
+	}
 
 	public static String getName(String txt) {
 		String pattern = ".*name=\"(\\S*)\".*";

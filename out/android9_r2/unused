@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+<remote fetch="https://android.googlesource.com/" name="aosp"/>
+<remote fetch="." name="x86"/>
+
+<default remote="aosp" revision="refs/tags/android-9.0.0_r54" sync-c="true" sync-j="4"/>
+
+<copyfile dest="Makefile" src="core/root.mk"/>
+<linkfile dest="build/CleanSpec.mk" src="CleanSpec.mk"/>
+<linkfile dest="build/buildspec.mk.default" src="buildspec.mk.default"/>
+<linkfile dest="build/core" src="core"/>
+<linkfile dest="build/envsetup.sh" src="envsetup.sh"/>
+<linkfile dest="build/target" src="target"/>
+<linkfile dest="build/tools" src="tools"/>
+</project>
+<linkfile dest="Android.bp" src="root.bp"/>
+<linkfile dest="bootstrap.bash" src="bootstrap.bash"/>
+</project>
+</manifest>

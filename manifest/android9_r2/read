@@ -1,0 +1,98 @@
+针对9.0-r2的版本，其他版本是否稳定不确定
+
+从各种py文件中可以判断9版本需要python2来编译
+
+
+====arm translator======
+dl.android-x86.org/houdini.php?v=9_y
+build/core/target/product/runtime_libart.mk   ro.dalvik.vm.native.bridge=libnb.so
+device/generic/common/device.mk
++$(shell mkdir -p $(TARGET_PRODUCT)/system/lib/arm/nb )
++    $(LOCAL_PATH)/libhoudini.so:system/lib/libhoudini.so \
++    $(foreach f,$(wildcard $(LOCAL_PATH)/nb/*),$(f):$(subst $(LOCAL_PATH),system/lib/arm,$(f))) \
++    $(foreach f,$(wildcard $(LOCAL_PATH)/arm/*),$(f):$(subst $(LOCAL_PATH),system/lib,$(f))) \
+
+device/generic/common/nativebridge/nativebridge.mk
++#ifneq ($(HOUDINI_PREINSTALL),intel)
+
+
+repo init -u git://git.osdn.net/gitroot/android-x86/manifest -b pie-x86 -m android-x86-9.0-r2.xml
+
+######To build 9.0-r2 with kernel 4.9, sync the source tree as above commands, then 
+cd kernel
+git fetch x86 kernel-4.9-p
+git checkout -t x86/kernel-4.9-p
+cd .. 
+
+重新编译kernel
+rm out/target/product/x86_64/obj/kernel/.config
+然后make kernel
+
+=====重新编译flex
+cd prebuilts/misc/linux-x86/flex
+
+    rm flex-2.5.39
+
+    tar zxf flex-2.5.39.tar.gz
+
+    cd flex-2.5.39
+
+    ./configure
+
+    make
+
+    mv flex  ..
+
+    cd ..
+
+    rm flex-2.5.39 -rf
+
+    mv flex flex-2.5.39
+
+    cd /mnt/android/Android-x86---pie-x86---9.0-rc1
+
+    m -j12 iso_img
+
+
+
+art/runtime/mem_map.cc
+    DCHECK(error_msg != nullptr);
+    DCHECK(ContainedWithinExistingMap(expected_ptr, byte_count, error_msg))
+        << ((error_msg != nullptr) ? *error_msg : std::string());
+    flags |= MAP_FIXED;
+#if !defined(ART_TARGET)
+  } else if (expected_ptr) {
+#define MAP_FIXED_NOREPLACE 0x100000
+    flags |= MAP_FIXED_NOREPLACE;
+#endif
+  } else {
+    CHECK_EQ(0, flags & MAP_FIXED);
+    // Don't bother checking for an overlapping region here. We'll
+    // check this if required after the fact inside CheckMapRequest.
+  }
+
+
+kernel/drivers/net/wireless/Makefile
+去掉broadcom
+
+======upstream 特殊的两个
+<project name="kernel/common" path="kernel" remote="x86" revision="066cc1de12be0ce8748bbd2863be0ace66327345" upstream="kernel-4.19"/>
+<project name="platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6" path="prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6" revision="eb5c9f0ae36bf964f6855bde54e1b387e2c26bb6" upstream="master"/>
+
+
+
+
+cp build/make/core/root.mk Makefile
+ln -s -r build/make/CleanSpec.mk build/CleanSpec.mk
+ln -s -r build/make/buildspec.mk.default build/buildspec.mk.default
+ln -s -r build/make/core build/core
+ln -s -r build/make/target build/target
+ln -s -r build/make/tools build/tools
+ln -s -r build/make/envsetup.sh build/envsetup.sh
+
+
+ln -s build/soong/root.bp Android.bp
+ln -s build/soong/bootstrap.bash bootstrap.bash
+
+cd prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6
+git reset eb5c9f0ae36bf964f6855bde54e1b387e2c26bb6 --hard
